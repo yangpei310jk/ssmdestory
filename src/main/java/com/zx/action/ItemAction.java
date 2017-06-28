@@ -29,13 +29,6 @@ public class ItemAction {
     public void  test3(){
         System.out.print("987654");
     }
-    public void  test2(){
-        System.out.print("123456");
-    }
-
-    public void  test(){
-        System.out.print("123456");
-    }
 
     public void  test4(){
         System.out.print("123456444444");
@@ -47,5 +40,8 @@ public class ItemAction {
         System.out.print("12345677777777777777777777777777777");
     }
 
+    public void  test6(){
+        System.out.print("1234566666666666");
+    }
 
 }
