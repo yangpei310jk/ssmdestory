@@ -27,10 +27,13 @@ public class ItemAction {
     private ItemService itemServic;
 
     public void test2(){
-
+        System.out.print("12345677777777777777777777777777777");
+        System.out.print("12345677777777777777777777777777777");
     }
 
     public void test(){
+        System.out.print("12345677777777777777777777777777777");
+        System.out.print("12345677777777777777777777777777777");
         System.out.print("12345677777777777777777777777777777");
         System.out.print("12345677777777777777777777777777777");
     }
