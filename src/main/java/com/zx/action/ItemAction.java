@@ -24,7 +24,11 @@ import java.util.List;
 @RequestMapping("item")
 public class ItemAction {
     @Autowired
-    private ItemService itemService;
+    private ItemService itemServic;
+
+    public void test2(){
+
+    }
 
 }
 
