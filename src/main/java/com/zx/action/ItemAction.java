@@ -26,5 +26,17 @@ public class ItemAction {
     @Autowired
     private ItemService itemService;
 
+
+    public void toList1() {
+        System.out.println("aaaaaaaaaaaaaaaa");
+    }
+
+    public void toList2() {
+        System.out.println("bbbbbbbbbbbbbbbbbb");
+    }
+
+    public void toList3() {
+        System.out.println("ccccccccccccccccccccc");
+    }
 }
 
