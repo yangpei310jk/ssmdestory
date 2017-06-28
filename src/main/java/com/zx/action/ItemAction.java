@@ -26,6 +26,9 @@ public class ItemAction {
     @Autowired
     private ItemService itemService;
 
+    public void  test3(){
+        System.out.print("987654");
+    }
     public void  test2(){
         System.out.print("123456");
     }
