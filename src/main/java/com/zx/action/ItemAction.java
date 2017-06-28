@@ -30,6 +30,8 @@ public class ItemAction {
         System.out.print("123456");
     }
 
-
+    public void  test(){
+        System.out.print("123456");
+    }
 
 }
