@@ -26,9 +26,17 @@ public class ItemAction {
     @Autowired
     private ItemService itemService;
 
-    public void hehe(){
+    public void hehea(){
         System.out.print("呵呵呵呵");
     }
+
+    public void heheb(){
+        System.out.print("呵呵呵呵");
+    }
+    public void hehec(){
+        System.out.print("呵呵呵呵");
+    }
+
 
 
     public void hehe2222(){
