@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.dao.MailHistoryMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.pojo.MailHistory" >
+    <id column="ID" property="id" jdbcType="DECIMAL" />
+    <result column="SENDNAME" property="sendname" jdbcType="VARCHAR" />
+    <result column="GETNAME" property="getname" jdbcType="VARCHAR" />
+    <result column="COPYNAME" property="copyname" jdbcType="VARCHAR" />
+    <result column="SECRETNAME" property="secretname" jdbcType="VARCHAR" />
+    <result column="MAILSUBJECT" property="mailsubject" jdbcType="VARCHAR" />
+    <result column="ATTACHNAME" property="attachname" jdbcType="VARCHAR" />
+    <result column="SENDTIEM" property="sendtiem" jdbcType="TIMESTAMP" />
+    <result column="ISSUCCESS" property="issuccess" jdbcType="DECIMAL" />
+    <result column="ADMINNAME" property="adminname" jdbcType="VARCHAR" />
+    <result column="IPADDRESS" property="ipaddress" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, SENDNAME, GETNAME, COPYNAME, SECRETNAME, MAILSUBJECT, ATTACHNAME, SENDTIEM, ISSUCCESS, 
+    ADMINNAME, IPADDRESS
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from ZX_MAILHISTORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from ZX_MAILHISTORY
+    where ID = #{id,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.zx.pojo.MailHistory" >
+    insert into ZX_MAILHISTORY (ID, SENDNAME, GETNAME, 
+      COPYNAME, SECRETNAME, MAILSUBJECT, 
+      ATTACHNAME, SENDTIEM, ISSUCCESS, 
+      ADMINNAME, IPADDRESS)
+    values (#{id,jdbcType=DECIMAL}, #{sendname,jdbcType=VARCHAR}, #{getname,jdbcType=VARCHAR}, 
+      #{copyname,jdbcType=VARCHAR}, #{secretname,jdbcType=VARCHAR}, #{mailsubject,jdbcType=VARCHAR}, 
+      #{attachname,jdbcType=VARCHAR}, #{sendtiem,jdbcType=TIMESTAMP}, #{issuccess,jdbcType=DECIMAL}, 
+      #{adminname,jdbcType=VARCHAR}, #{ipaddress,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.pojo.MailHistory" >
+
+    <selectKey resultType ="java.math.BigDecimal" keyProperty= "id" keyColumn="id"
+               order= "BEFORE">
+      SELECT SEQ_MAIL_ID.nextval as id  FROM dual
+    </selectKey >
+
+    insert into ZX_MAILHISTORY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="sendname != null" >
+        SENDNAME,
+      </if>
+      <if test="getname != null" >
+        GETNAME,
+      </if>
+      <if test="copyname != null" >
+        COPYNAME,
+      </if>
+      <if test="secretname != null" >
+        SECRETNAME,
+      </if>
+      <if test="mailsubject != null" >
+        MAILSUBJECT,
+      </if>
+      <if test="attachname != null" >
+        ATTACHNAME,
+      </if>
+      <if test="sendtiem != null" >
+        SENDTIEM,
+      </if>
+      <if test="issuccess != null" >
+        ISSUCCESS,
+      </if>
+      <if test="adminname != null" >
+        ADMINNAME,
+      </if>
+      <if test="ipaddress != null" >
+        IPADDRESS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=DECIMAL},
+      </if>
+      <if test="sendname != null" >
+        #{sendname,jdbcType=VARCHAR},
+      </if>
+      <if test="getname != null" >
+        #{getname,jdbcType=VARCHAR},
+      </if>
+      <if test="copyname != null" >
+        #{copyname,jdbcType=VARCHAR},
+      </if>
+      <if test="secretname != null" >
+        #{secretname,jdbcType=VARCHAR},
+      </if>
+      <if test="mailsubject != null" >
+        #{mailsubject,jdbcType=VARCHAR},
+      </if>
+      <if test="attachname != null" >
+        #{attachname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtiem != null" >
+        #{sendtiem,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issuccess != null" >
+        #{issuccess,jdbcType=DECIMAL},
+      </if>
+      <if test="adminname != null" >
+        #{adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        #{ipaddress,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.pojo.MailHistory" >
+    update ZX_MAILHISTORY
+    <set >
+      <if test="sendname != null" >
+        SENDNAME = #{sendname,jdbcType=VARCHAR},
+      </if>
+      <if test="getname != null" >
+        GETNAME = #{getname,jdbcType=VARCHAR},
+      </if>
+      <if test="copyname != null" >
+        COPYNAME = #{copyname,jdbcType=VARCHAR},
+      </if>
+      <if test="secretname != null" >
+        SECRETNAME = #{secretname,jdbcType=VARCHAR},
+      </if>
+      <if test="mailsubject != null" >
+        MAILSUBJECT = #{mailsubject,jdbcType=VARCHAR},
+      </if>
+      <if test="attachname != null" >
+        ATTACHNAME = #{attachname,jdbcType=VARCHAR},
+      </if>
+      <if test="sendtiem != null" >
+        SENDTIEM = #{sendtiem,jdbcType=TIMESTAMP},
+      </if>
+      <if test="issuccess != null" >
+        ISSUCCESS = #{issuccess,jdbcType=DECIMAL},
+      </if>
+      <if test="adminname != null" >
+        ADMINNAME = #{adminname,jdbcType=VARCHAR},
+      </if>
+      <if test="ipaddress != null" >
+        IPADDRESS = #{ipaddress,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.pojo.MailHistory" >
+    update ZX_MAILHISTORY
+    set SENDNAME = #{sendname,jdbcType=VARCHAR},
+      GETNAME = #{getname,jdbcType=VARCHAR},
+      COPYNAME = #{copyname,jdbcType=VARCHAR},
+      SECRETNAME = #{secretname,jdbcType=VARCHAR},
+      MAILSUBJECT = #{mailsubject,jdbcType=VARCHAR},
+      ATTACHNAME = #{attachname,jdbcType=VARCHAR},
+      SENDTIEM = #{sendtiem,jdbcType=TIMESTAMP},
+      ISSUCCESS = #{issuccess,jdbcType=DECIMAL},
+      ADMINNAME = #{adminname,jdbcType=VARCHAR},
+      IPADDRESS = #{ipaddress,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=DECIMAL}
+  </update>
+</mapper>

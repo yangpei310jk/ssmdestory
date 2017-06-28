@@ -1,0 +1,301 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.dao.ItemMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.pojo.Item" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="TITLE" property="title" jdbcType="VARCHAR" />
+    <result column="SELL_POINT" property="sellPoint" jdbcType="VARCHAR" />
+    <result column="PRICE" property="price" jdbcType="INTEGER" />
+    <result column="NUM" property="num" jdbcType="INTEGER" />
+    <result column="BARCODE" property="barcode" jdbcType="VARCHAR" />
+    <result column="IMAGE" property="image" jdbcType="VARCHAR" />
+    <result column="CID" property="cid" jdbcType="INTEGER" />
+    <result column="STATUS" property="status" jdbcType="INTEGER" />
+    <result column="CREATED" property="created" jdbcType="TIMESTAMP" />
+    <result column="UPDATED" property="updated" jdbcType="TIMESTAMP" />
+  </resultMap>
+
+
+  <resultMap id="ItemToCat" type="com.zx.pojo.Item" >
+    <id column="zid" property="id" jdbcType="INTEGER" />
+    <result column="ztitle" property="title" jdbcType="VARCHAR" />
+    <result column="zSELLPOINT" property="sellPoint" jdbcType="VARCHAR" />
+    <result column="zPRICE" property="price" jdbcType="INTEGER" />
+    <result column="zNUM" property="num" jdbcType="INTEGER" />
+    <result column="zBARCODE" property="barcode" jdbcType="VARCHAR" />
+    <result column="zIMAGE" property="image" jdbcType="VARCHAR" />
+    <result column="zCID" property="cid" jdbcType="INTEGER" />
+    <result column="zSTATUS" property="status" jdbcType="INTEGER" />
+    <result column="zCREATED" property="created" jdbcType="TIMESTAMP" />
+    <result column="zUPDATED" property="updated" jdbcType="TIMESTAMP" />
+
+    <association property="cat" javaType="com.zx.pojo.ItemCat">
+      <result column="tid" property="id" jdbcType="INTEGER"></result>
+      <result column="tname" property="name" jdbcType="VARCHAR"></result>
+    </association>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, TITLE, SELL_POINT, PRICE, NUM, BARCODE, IMAGE, CID, STATUS, CREATED, UPDATED
+  </sql>
+
+  <sql id="columnList" >
+    z.id as zid, z.TITLE as ztitle, z.SELL_POINT as zsellpoint,
+    z.PRICE as zprice, z.NUM as znum, z.BARCODE as zbarcode,
+    z.IMAGE as zimage,z.STATUS as zstatus,z.CREATED as zcreated,
+    z.UPDATED as zupdated,z.CID as zcid,t.id as tid,t.name as tname
+  </sql>
+
+
+
+  <!--item cat两表联查-->
+  <!--条件查询-->
+  <select id="selectItemWhere" resultMap="ItemToCat" parameterType="com.zx.pojo.Item">
+  select
+    <include refid="columnList"></include>
+    from
+    zx_item z left join zx_item_cat t
+    on z.cid=t.id
+    <where>
+      <trim prefixOverrides="and">
+        <if test="title!=null and title!=''">
+          <!-- and u_name=#{name} -->
+          and z.title like '%${title}%'
+        </if>
+        <if test="cid!=null and cid!=''">
+          and z.cid = #{cid}
+        </if>
+      </trim>
+    </where>
+    ORDER BY z.id ${order}
+  </select>
+
+
+  <!--批删除-->
+  <delete id="deleteItemById" parameterType="java.util.ArrayList" >
+    delete from zx_item where id in
+    <foreach collection="list" open="(" close=")" index="i" item="a" separator=",">
+      #{a}
+    </foreach>
+  </delete>
+
+
+  <!--分页条件总条数-->
+  <!--条件查询的总条数-->
+  <select id="selectItemCatCount" resultType="java.lang.Integer" parameterType="com.zx.pojo.Item">
+    SELECT COUNT (id) FROM zx_item
+    <where>
+      <if test="title!=null and title!=''">
+        <!-- and u_name=#{name} -->
+        and title like '%${title}%'
+      </if>
+      <!--<if test="uPsw!=null and uPsw!=''">-->
+      <!--and u_psw=#{uPsw}-->
+      <!--</if>-->
+      <!--<if test="uPhone!=null and uPhone!=''">-->
+      <!--and u_phone like '%${uPhone}%'-->
+      <!--</if>-->
+      <if test="cid!=null and cid!=''">
+        and cid = #{cid}
+      </if>
+    </where>
+  </select>
+
+
+  <!--item cat两表联查-->
+  <!--分页条件查询-->
+  <select id="selectItemCat" resultMap="ItemToCat" parameterType="com.zx.pojo.Item">
+
+    select b.* from(
+    select a.* from
+    (select
+    <include refid="columnList"></include>,rownum r
+    from
+    zx_item z left join zx_item_cat t
+    on z.cid=t.id ) a
+    <where>
+      <trim prefixOverrides="and">
+        <if test="title!=null and title!=''">
+          <!-- and u_name=#{name} -->
+          and a.ztitle like '%${title}%'
+        </if>
+        <!--<if test="uPsw!=null and uPsw!=''">-->
+        <!--and a.upsw=#{uPsw}-->
+        <!--</if>-->
+        <!--<if test="uPhone!=null and uPhone!=''">-->
+        <!--and a.uphone like '%${uPhone}%'-->
+        <!--</if>-->
+        <if test="cid!=null and cid!=''">
+          and a.zcid = #{cid}
+        </if>
+        <if test="end!=null">
+          and rownum &lt;#{end}
+        </if>
+      </trim>
+    </where>
+    ORDER BY a.zid ${order}
+    ) b
+    where r &gt;#{start}
+
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from ZX_ITEM
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ZX_ITEM
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.pojo.Item" >
+    insert into ZX_ITEM (ID, TITLE, SELL_POINT,
+      PRICE, NUM, BARCODE,
+      IMAGE, CID, STATUS,
+      CREATED, UPDATED)
+    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{sellPoint,jdbcType=VARCHAR},
+      #{price,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, #{barcode,jdbcType=VARCHAR},
+      #{image,jdbcType=VARCHAR}, #{cid,jdbcType=INTEGER}, #{status,jdbcType=INTEGER},
+      #{created,jdbcType=TIMESTAMP}, #{updated,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zx.pojo.Item" >
+    <selectKey keyColumn="id" keyProperty="id" resultType="java.lang.Integer" order="BEFORE">
+      select seq_item_id.nextval as id from dual
+    </selectKey>
+    insert into ZX_ITEM
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="title != null" >
+        TITLE,
+      </if>
+      <if test="sellPoint != null" >
+        SELL_POINT,
+      </if>
+      <if test="price != null" >
+        PRICE,
+      </if>
+      <if test="num != null" >
+        NUM,
+      </if>
+      <if test="barcode != null" >
+        BARCODE,
+      </if>
+      <if test="image != null" >
+        IMAGE,
+      </if>
+      <if test="cid != null" >
+        CID,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="created != null" >
+        CREATED,
+      </if>
+      <if test="updated != null" >
+        UPDATED,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sellPoint != null" >
+        #{sellPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="barcode != null" >
+        #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.pojo.Item" >
+    update ZX_ITEM
+    <set >
+      <if test="title != null" >
+        TITLE = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="sellPoint != null" >
+        SELL_POINT = #{sellPoint,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        PRICE = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        NUM = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="barcode != null" >
+        BARCODE = #{barcode,jdbcType=VARCHAR},
+      </if>
+      <if test="image != null" >
+        IMAGE = #{image,jdbcType=VARCHAR},
+      </if>
+      <if test="cid != null" >
+        CID = #{cid,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        UPDATED = #{updated,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.pojo.Item" >
+    update ZX_ITEM
+    set TITLE = #{title,jdbcType=VARCHAR},
+      SELL_POINT = #{sellPoint,jdbcType=VARCHAR},
+      PRICE = #{price,jdbcType=INTEGER},
+      NUM = #{num,jdbcType=INTEGER},
+      BARCODE = #{barcode,jdbcType=VARCHAR},
+      IMAGE = #{image,jdbcType=VARCHAR},
+      CID = #{cid,jdbcType=INTEGER},
+      STATUS = #{status,jdbcType=INTEGER},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      UPDATED = #{updated,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

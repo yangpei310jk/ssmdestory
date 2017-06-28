@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zx.dao.AdminMapper" >
+  <resultMap id="BaseResultMap" type="com.zx.pojo.Admin" >
+    <id column="ID" property="id" jdbcType="INTEGER" />
+    <result column="ADMIN_NAME" property="adminName" jdbcType="VARCHAR" />
+    <result column="PHONE" property="phone" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+    <result column="CREATED" property="created" jdbcType="TIMESTAMP" />
+    <result column="UPDATED" property="updated" jdbcType="TIMESTAMP" />
+    <result column="LONGIN_TIME" property="longinTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, ADMIN_NAME, PHONE, EMAIL, PASSWORD, CREATED, UPDATED, LONGIN_TIME
+  </sql>
+
+
+
+  <!--注册账号-->
+  <insert id="insertSelective" parameterType="com.zx.pojo.Admin" >
+  <selectKey keyColumn="id" keyProperty="id" order="BEFORE" resultType="Integer">
+    select seq_admin_id.nextval as id from dual
+  </selectKey>
+
+  insert into ZX_ADMIN
+  <trim prefix="(" suffix=")" suffixOverrides="," >
+    <if test="id != null" >
+      ID,
+    </if>
+    <if test="adminName != null" >
+      ADMIN_NAME,
+    </if>
+    <if test="phone != null" >
+      PHONE,
+    </if>
+    <if test="email != null" >
+      EMAIL,
+    </if>
+    <if test="password != null" >
+      PASSWORD,
+    </if>
+    <if test="created != null" >
+      CREATED,
+    </if>
+    <if test="updated != null" >
+      UPDATED,
+    </if>
+    <if test="longinTime != null" >
+      LONGIN_TIME,
+    </if>
+  </trim>
+  <trim prefix="values (" suffix=")" suffixOverrides="," >
+    <if test="id != null" >
+      #{id,jdbcType=INTEGER},
+    </if>
+    <if test="adminName != null" >
+      #{adminName,jdbcType=VARCHAR},
+    </if>
+    <if test="phone != null" >
+      #{phone,jdbcType=VARCHAR},
+    </if>
+    <if test="email != null" >
+      #{email,jdbcType=VARCHAR},
+    </if>
+    <if test="password != null" >
+      #{password,jdbcType=VARCHAR},
+    </if>
+    <if test="created != null" >
+      #{created,jdbcType=TIMESTAMP},
+    </if>
+    <if test="updated != null" >
+      #{updated,jdbcType=TIMESTAMP},
+    </if>
+    <if test="longinTime != null" >
+      #{longinTime,jdbcType=TIMESTAMP},
+    </if>
+  </trim>
+</insert>
+
+
+<!--注册查看用户是否存在-->
+  <select id="selectEnrollPhone" resultMap="BaseResultMap" parameterType="com.zx.pojo.Admin" >
+    select
+    <include refid="Base_Column_List" />
+    from ZX_ADMIN
+    where PHONE= #{phone}
+  </select>
+
+  <select id="selectEnrollEmail" resultMap="BaseResultMap" parameterType="com.zx.pojo.Admin" >
+    select
+    <include refid="Base_Column_List" />
+    from ZX_ADMIN
+    where EMAIL= #{email}
+  </select>
+
+
+
+
+
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ZX_ADMIN
+    where ID = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ZX_ADMIN
+    where ID = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.zx.pojo.Admin" >
+    insert into ZX_ADMIN (ID, ADMIN_NAME, PHONE, 
+      EMAIL, PASSWORD, CREATED, 
+      UPDATED, LONGIN_TIME)
+    values (#{id,jdbcType=INTEGER}, #{adminName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{email,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP}, 
+      #{updated,jdbcType=TIMESTAMP}, #{longinTime,jdbcType=TIMESTAMP})
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.zx.pojo.Admin" >
+    update ZX_ADMIN
+    <set >
+      <if test="adminName != null" >
+        ADMIN_NAME = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        PHONE = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        CREATED = #{created,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updated != null" >
+        UPDATED = #{updated,jdbcType=TIMESTAMP},
+      </if>
+      <if test="longinTime != null" >
+        LONGIN_TIME = #{longinTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zx.pojo.Admin" >
+    update ZX_ADMIN
+    set ADMIN_NAME = #{adminName,jdbcType=VARCHAR},
+      PHONE = #{phone,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      CREATED = #{created,jdbcType=TIMESTAMP},
+      UPDATED = #{updated,jdbcType=TIMESTAMP},
+      LONGIN_TIME = #{longinTime,jdbcType=TIMESTAMP}
+    where ID = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
