@@ -27,9 +27,15 @@ public class ItemAction {
     private ItemService itemService;
 
 
-    public void one(){
-
+    public void one22222(){
+        //ssdsadasdsadasdas
+        System.out.println("ssssssssssssssssssssssss");
+        System.out.println("ssssssssssssssssssssssss");
+        System.out.println("ssssssssssssssssssssssss");
     }
+        public void h(){
+
+        }
 
     public void hehe2222(){
         System.out.print("哈哈哈哈哈哈");
