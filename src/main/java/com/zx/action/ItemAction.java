@@ -27,9 +27,8 @@ public class ItemAction {
     private ItemService itemServic;
 
     public void test2(){
-
+        System.out.println("tttttttttttttttttt");
     }
-
 
     public void toList1() {
         System.out.println("aaaaaaaaaaaaaaaa");
