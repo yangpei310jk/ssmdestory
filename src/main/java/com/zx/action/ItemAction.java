@@ -26,18 +26,12 @@ public class ItemAction {
     @Autowired
     private ItemService itemService;
 
-    public void  test3(){
-        System.out.print("987654");
-    }
-
-    public void  test4(){
-        System.out.print("123456444444");
-    }
-    public void  test5(){
-        System.out.print("12345655555555555555555555555555555");
-    }
 
     public void  test6(){
+        System.out.print("1234566666666666");
+    }
+
+    public void  test8(){
         System.out.print("1234566666666666");
     }
 
