@@ -26,5 +26,9 @@ public class ItemAction {
     @Autowired
     private ItemService itemService;
 
+    public void test(){
+        System.out.print("12345677777777777777777777777777777");
+        System.out.print("12345677777777777777777777777777777");
+    }
 }
 
