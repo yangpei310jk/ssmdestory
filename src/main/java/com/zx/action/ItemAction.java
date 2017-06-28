@@ -29,9 +29,12 @@ public class ItemAction {
 
 
 
+    public void hahaha111111(){
+        System.out.print("哈哈哈哈哈哈");
+    }
 
     public void hehe2222(){
-        System.out.print("呵呵呵呵");
+        System.out.print("哈哈哈哈哈哈");
     }
 
 
