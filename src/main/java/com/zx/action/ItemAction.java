@@ -27,32 +27,10 @@ public class ItemAction {
     private ItemService itemService;
 
 
-
-
-
-    public void hehe2222(){
-        System.out.print("呵呵呵呵");
+    public void one22222(){
+        //ssdsadasdsadasdas
+        System.out.println("ssssssssssssssssssssssss");
     }
-
-
-    public void hehe333333(){
-        System.out.print("呵呵呵呵");
-    }
-
-
-    public void hehe666(){
-        System.out.print("呵呵呵呵");
-        System.out.print("呵呵呵呵");
-        System.out.print("呵呵呵呵");
-        System.out.print("呵呵呵呵");
-
-    }
-
-
-    public void hehe777(){
-        System.out.print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
-    }
-
 
 
 
