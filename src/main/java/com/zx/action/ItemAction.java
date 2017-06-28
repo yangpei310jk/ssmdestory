@@ -26,5 +26,10 @@ public class ItemAction {
     @Autowired
     private ItemService itemService;
 
+    public void hello(){
+        System.out.println(111111);
+
+    }
+
 
 }
