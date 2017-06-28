@@ -27,9 +27,9 @@ public class ItemAction {
     private ItemService itemService;
 
 
-    public void one(){
-
+    public void one22222(){
         //ssdsadasdsadasdas
+        System.out.println("ssssssssssssssssssssssss");
     }
 
 
