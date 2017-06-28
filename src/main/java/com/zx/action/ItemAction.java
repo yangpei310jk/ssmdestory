@@ -29,26 +29,21 @@ public class ItemAction {
     public void hehe7(){
         System.out.print("呵呵呵呵");
     }
+
     public void hehe77(){
         System.out.print("呵呵呵呵");
     }
-
 
     public void hehea(){
         System.out.print("呵呵呵呵");
     }
 
-    public void heheb(){
-        System.out.print("呵呵呵呵");
+    public void hahaha111111(){
+        System.out.print("哈哈哈哈哈哈");
     }
-    public void hehec(){
-        System.out.print("呵呵呵呵");
-    }
-
-
 
     public void hehe2222(){
-        System.out.print("呵呵呵呵");
+        System.out.print("哈哈哈哈哈哈");
     }
 
 
@@ -59,11 +54,15 @@ public class ItemAction {
 
     public void hehe666(){
         System.out.print("呵呵呵呵");
+        System.out.print("呵呵呵呵");
+        System.out.print("呵呵呵呵");
+        System.out.print("呵呵呵呵");
+
     }
 
 
     public void hehe777(){
-        System.out.print("呵呵呵呵");
+        System.out.print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
     }
 
 
