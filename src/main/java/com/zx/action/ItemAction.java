@@ -55,13 +55,25 @@ public class ItemAction {
     public void hehe666(){
         System.out.print("呵呵呵呵");
         System.out.print("呵呵呵呵");
+    }
+
+
+    public void hehe777(){
+        System.out.print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
+    }
+
+
+
+    public void hehe666666(){
+        System.out.print("呵呵呵呵");
+        System.out.print("呵呵呵呵");
         System.out.print("呵呵呵呵");
         System.out.print("呵呵呵呵");
 
     }
 
 
-    public void hehe777(){
+    public void hehe777888(){
         System.out.print("rrrrrrrrrrrrrrrrrrrrrrrrrrrrrr");
     }
 
